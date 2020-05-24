@@ -1,3 +1,4 @@
+@[Link("glfw3")]
 lib LibGLFW
   # Macro Definition Documentation
   VERSION_MAJOR = 3
@@ -21,19 +22,19 @@ lib LibGLFW
   FORMAT_UNAVAILABLE = 0x00010009
   NO_WINDOW_CONTEXT = 0x0001000A
 
-  type GLFWglproc = Void -> Void
-  type GLFWerrorfun = Int32, Pointer(Int32) -> Void
+  alias GLproc = Void -> Void
+  alias Errorfun = Int32, Pointer(Int32) -> Void
 
-  fun makeContextCurrent = glfwMakeContextCurrent(window : Pointer(GLFWwindow)) : Void
-  fun getCurrentContext = glfwGetCurrentContext(Void) : Pointer(GLFWwindow)
+  fun makeContextCurrent = glfwMakeContextCurrent(window : Pointer(Window)) : Void
+  fun getCurrentContext = glfwGetCurrentContext : Pointer(Window)
   fun swapInterval = glfwSwapInterval(interval : Int32) : Void
   fun extensionSupported = glfwExtensionSupported(extension : Pointer(Int8)) : Int32
-  fun getProcAddress = glfwGetProcAddress(procname : Pointer(Int8)) : GLFWglproc
-  fun init = glfwInit(Void) : Int32
-  fun terminate = glfwTerminate(Void) : Void
+  fun getProcAddress = glfwGetProcAddress(procname : Pointer(Int8)) : GLproc
+  fun init = glfwInit : Int32
+  fun terminate = glfwTerminate : Void
   fun initHint = glfwInitHint(hint : Int32, value : Int32) : Void
   fun getVersion = glfwGetVersion(major : Pointer(Int32), minor : Pointer(Int32), rev : Pointer(Int32)) : Void
-  fun getVersionString = glfwGetVersionString(Void) : Pointer(Int8)
+  fun getVersionString = glfwGetVersionString : Pointer(Int8)
   fun getError = glfwGetError(description : Pointer(Pointer(Int8))) : Int32
-  fun setErrorCallback = glfwSetErrorCallback(callback : GLFWerrorfun) : GLFWerrorfun
+  fun setErrorCallback = glfwSetErrorCallback(callback : Errorfun) : Errorfun
 end

@@ -1,3 +1,4 @@
+@[Link("glfw3")]
 lib LibGLFW
   # Gamepad Axes
   GAMEPAD_AXIS_LEFT_X = 0
@@ -206,56 +207,58 @@ lib LibGLFW
   HAND_CURSOR = 0x00036004
   HRESIZE_CURSOR = 0x00036005
   VRESIZE_CURSOR = 0x00036006
-  # Typedefs
-  # typedef struct GLFWcursor GLFWcursor
-  # typedef void(* GLFWmousebuttonfun)(GLFWwindow *, int, int, int)
-  # typedef void(* GLFWcursorposfun)(GLFWwindow *, double, double)
-  # typedef void(* GLFWcursorenterfun)(GLFWwindow *, int)
-  # typedef void(* GLFWscrollfun)(GLFWwindow *, double, double)
-  # typedef void(* GLFWkeyfun)(GLFWwindow *, int, int, int, int)
-  # typedef void(* GLFWcharfun)(GLFWwindow *, unsigned int)
-  # typedef void(* GLFWcharmodsfun)(GLFWwindow *, unsigned int, int)
-  # typedef void(* GLFWdropfun)(GLFWwindow *, int, const char *[])
-  # typedef void(* GLFWjoystickfun)(int, int)
-  # typedef struct GLFWgamepadstate GLFWgamepadstate
-  fun getInputMode = glfwGetInputMode(window : Pointer(GLFWwindow), mode : Int32) : Int32
-  fun setInputMode = glfwSetInputMode(window : Pointer(GLFWwindow), mode : Int32, value : Int32) : Void
-  fun rawMouseMotionSupported = glfwRawMouseMotionSupported(Void) : Int32
+
+  alias Mousebuttonfun = Pointer(Window), Int32, Int32, Int32 -> Void
+  alias Cursorposfun = Pointer(Window), Float64, Float64 -> Void
+  alias Cursorenterfun = Pointer(Window), Int32 -> Void
+  alias Scrollfun = Pointer(Window), Float64, Float64 -> Void
+  alias Keyfun = Pointer(Window), Int32, Int32, Int32, Int32 -> Void
+  alias Charfun = Pointer(Window), UInt32 -> Void
+  alias Charmodsfun = Pointer(Window), UInt32, Int32 -> Void
+  alias Dropfun = Pointer(Window), Int32, Pointer(Pointer(Int8)) -> Void
+  alias Joystickfun = Int32, Int32 -> Void
+
+  type Cursor = Void
+  type Gamepadstate = Void
+
+  fun getInputMode = glfwGetInputMode(window : Pointer(Window), mode : Int32) : Int32
+  fun setInputMode = glfwSetInputMode(window : Pointer(Window), mode : Int32, value : Int32) : Void
+  fun rawMouseMotionSupported = glfwRawMouseMotionSupported : Int32
   fun getKeyName = glfwGetKeyName(key : Int32, scancode : Int32) : Pointer(Int8)
   fun getKeyScancode = glfwGetKeyScancode(key : Int32) : Int32
-  fun getKey = glfwGetKey(window : Pointer(GLFWwindow), key : Int32) : Int32
-  fun getMouseButton = glfwGetMouseButton(window : Pointer(GLFWwindow), button : Int32) : Int32
-  fun getCursorPos = glfwGetCursorPos(window : Pointer(GLFWwindow), xpos : Pointer(Float64), ypos : Pointer(Float64)) : Void
-  fun setCursorPos = glfwSetCursorPos(window : Pointer(GLFWwindow), xpos : Float64, ypos : Float64) : Void
-  fun createCursor = glfwCreateCursor(image : Pointer(GLFWimage), xhot : Int32, yhot : Int32) : Pointer(GLFWcursor)
-  fun createStandardCursor = glfwCreateStandardCursor(shape : Int32) : Pointer(GLFWcursor)
-  fun destroyCursor = glfwDestroyCursor(cursor : Pointer(GLFWcursor)) : Void
-  fun setCursor = glfwSetCursor(window : Pointer(GLFWwindow), cursor : Pointer(GLFWcursor)) : Void
-  fun setKeyCallback = glfwSetKeyCallback(window : Pointer(GLFWwindow), callback : GLFWkeyfun) : GLFWkeyfun
-  fun setCharCallback = glfwSetCharCallback(window : Pointer(GLFWwindow), callback : GLFWcharfun) : GLFWcharfun
-  fun setCharModsCallback = glfwSetCharModsCallback(window : Pointer(GLFWwindow), callback : GLFWcharmodsfun) : GLFWcharmodsfun
-  fun setMouseButtonCallback = glfwSetMouseButtonCallback(window : Pointer(GLFWwindow), callback : GLFWmousebuttonfun) : GLFWmousebuttonfun
-  fun setCursorPosCallback = glfwSetCursorPosCallback(window : Pointer(GLFWwindow), callback : GLFWcursorposfun) : GLFWcursorposfun
-  fun setCursorEnterCallback = glfwSetCursorEnterCallback(window : Pointer(GLFWwindow), callback : GLFWcursorenterfun) : GLFWcursorenterfun
-  fun setScrollCallback = glfwSetScrollCallback(window : Pointer(GLFWwindow), callback : GLFWscrollfun) : GLFWscrollfun
-  fun setDropCallback = glfwSetDropCallback(window : Pointer(GLFWwindow), callback : GLFWdropfun) : GLFWdropfun
+  fun getKey = glfwGetKey(window : Pointer(Window), key : Int32) : Int32
+  fun getMouseButton = glfwGetMouseButton(window : Pointer(Window), button : Int32) : Int32
+  fun getCursorPos = glfwGetCursorPos(window : Pointer(Window), xpos : Pointer(Float64), ypos : Pointer(Float64)) : Void
+  fun setCursorPos = glfwSetCursorPos(window : Pointer(Window), xpos : Float64, ypos : Float64) : Void
+  fun createCursor = glfwCreateCursor(image : Pointer(Image), xhot : Int32, yhot : Int32) : Pointer(Cursor)
+  fun createStandardCursor = glfwCreateStandardCursor(shape : Int32) : Pointer(Cursor)
+  fun destroyCursor = glfwDestroyCursor(cursor : Pointer(Cursor)) : Void
+  fun setCursor = glfwSetCursor(window : Pointer(Window), cursor : Pointer(Cursor)) : Void
+  fun setKeyCallback = glfwSetKeyCallback(window : Pointer(Window), callback : Keyfun) : Keyfun
+  fun setCharCallback = glfwSetCharCallback(window : Pointer(Window), callback : Charfun) : Charfun
+  fun setCharModsCallback = glfwSetCharModsCallback(window : Pointer(Window), callback : Charmodsfun) : Charmodsfun
+  fun setMouseButtonCallback = glfwSetMouseButtonCallback(window : Pointer(Window), callback : Mousebuttonfun) : Mousebuttonfun
+  fun setCursorPosCallback = glfwSetCursorPosCallback(window : Pointer(Window), callback : Cursorposfun) : Cursorposfun
+  fun setCursorEnterCallback = glfwSetCursorEnterCallback(window : Pointer(Window), callback : Cursorenterfun) : Cursorenterfun
+  fun setScrollCallback = glfwSetScrollCallback(window : Pointer(Window), callback : Scrollfun) : Scrollfun
+  fun setDropCallback = glfwSetDropCallback(window : Pointer(Window), callback : Dropfun) : Dropfun
   fun joystickPresent = glfwJoystickPresent(jid : Int32) : Int32
   fun getJoystickAxes = glfwGetJoystickAxes(jid : Int32, count : Pointer(Int32)) : Pointer(Float32)
-  fun getJoystickButtons = glfwGetJoystickButtons(jid : Int32, count : Pointer(Int32)) : Pointer(Uint8)
-  fun getJoystickHats = glfwGetJoystickHats(jid : Int32, count : Pointer(Int32)) : Pointer(Uint8)
+  fun getJoystickButtons = glfwGetJoystickButtons(jid : Int32, count : Pointer(Int32)) : Pointer(UInt8)
+  fun getJoystickHats = glfwGetJoystickHats(jid : Int32, count : Pointer(Int32)) : Pointer(UInt8)
   fun getJoystickName = glfwGetJoystickName(jid : Int32) : Pointer(Int8)
   fun getJoystickGUID = glfwGetJoystickGUID(jid : Int32) : Pointer(Int8)
-  fun setJoystickUserPointer = glfwSetJoystickUserPointer(jid : Int32, pointer : Poiner(Void)) : Void
-  fun getJoystickUserPointer = glfwGetJoystickUserPointer(jid : Int32) : Poiner(Void)
+  fun setJoystickUserPointer = glfwSetJoystickUserPointer(jid : Int32, pointer : Pointer(Void)) : Void
+  fun getJoystickUserPointer = glfwGetJoystickUserPointer(jid : Int32) : Pointer(Void)
   fun joystickIsGamepad = glfwJoystickIsGamepad(jid : Int32) : Int32
-  fun setJoystickCallback = glfwSetJoystickCallback(callback : GLFWjoystickfun) : GLFWjoystickfun
+  fun setJoystickCallback = glfwSetJoystickCallback(callback : Joystickfun) : Joystickfun
   fun updateGamepadMappings = glfwUpdateGamepadMappings(string : Pointer(Int8)) : Int32
   fun getGamepadName = glfwGetGamepadName(jid : Int32) : Pointer(Int8)
-  fun getGamepadState = glfwGetGamepadState(jid : Int32, state : Pointer(GLFWgamepadstate)) : Int32
-  fun setClipboardString = glfwSetClipboardString(window : Pointer(GLFWwindow), string : Pointer(Int8)) : Void
-  fun getClipboardString = glfwGetClipboardString(window : Pointer(GLFWwindow)) : Pointer(Int8)
-  fun getTime = glfwGetTime(Void) : Float64
+  fun getGamepadState = glfwGetGamepadState(jid : Int32, state : Pointer(Gamepadstate)) : Int32
+  fun setClipboardString = glfwSetClipboardString(window : Pointer(Window), string : Pointer(Int8)) : Void
+  fun getClipboardString = glfwGetClipboardString(window : Pointer(Window)) : Pointer(Int8)
+  fun getTime = glfwGetTime : Float64
   fun setTime = glfwSetTime(time : Float64) : Void
-  fun getTimerValue = glfwGetTimerValue(Void) : UInt64
-  fun getTimerFrequency = glfwGetTimerFrequency(Void) : UInt64
+  fun getTimerValue = glfwGetTimerValue : UInt64
+  fun getTimerFrequency = glfwGetTimerFrequency : UInt64
 end
