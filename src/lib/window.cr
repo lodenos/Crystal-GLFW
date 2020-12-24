@@ -67,9 +67,13 @@ lib LibGLFW
   fun windowShouldClose = glfwWindowShouldClose(window : Pointer(Window)) : Int32
   fun setWindowShouldClose = glfwSetWindowShouldClose(window : Pointer(Window), value : Int32) : Void
   fun setWindowTitle = glfwSetWindowTitle(window : Pointer(Window), title : Pointer(Int8)) : Void
+  # INFO : NOT Supported
   fun setWindowIcon = glfwSetWindowIcon(window : Pointer(Window), count : Int32, images : Pointer(Image)) : Void
   fun getWindowPos = glfwGetWindowPos(window : Pointer(Window), xpos : Pointer(Int32), ypos : Pointer(Int32)) : Void
   fun setWindowPos = glfwSetWindowPos(window : Pointer(Window), xpos : Int32, ypos : Int32) : Void
+
+
+
   fun getWindowSize = glfwGetWindowSize(window : Pointer(Window), width : Pointer(Int32), height : Pointer(Int32)) : Void
   fun setWindowSizeLimits = glfwSetWindowSizeLimits(window : Pointer(Window), minwidth : Int32, minheight : Int32, maxwidth : Int32, maxheight : Int32) : Void
   fun setWindowAspectRatio = glfwSetWindowAspectRatio(window : Pointer(Window), numer : Int32, denom : Int32) : Void
@@ -81,7 +85,10 @@ lib LibGLFW
   fun setWindowOpacity = glfwSetWindowOpacity(window : Pointer(Window), opacity : Float32) : Void
   fun iconifyWindow = glfwIconifyWindow(window : Pointer(Window)) : Void
   fun restoreWindow = glfwRestoreWindow(window : Pointer(Window)) : Void
+  # INFO : Supported
+  fun makeContextCurrent = glfwMakeContextCurrent(window : Pointer(Window)) : Void
   fun maximizeWindow = glfwMaximizeWindow(window : Pointer(Window)) : Void
+  # INFO : Supported
   fun showWindow = glfwShowWindow(window : Pointer(Window)) : Void
   fun hideWindow = glfwHideWindow(window : Pointer(Window)) : Void
   fun focusWindow = glfwFocusWindow(window : Pointer(Window)) : Void

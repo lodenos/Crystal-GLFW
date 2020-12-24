@@ -25,7 +25,6 @@ lib LibGLFW
   alias GLproc = Void -> Void
   alias Errorfun = Int32, Pointer(Int32) -> Void
 
-  fun makeContextCurrent = glfwMakeContextCurrent(window : Pointer(Window)) : Void
   fun getCurrentContext = glfwGetCurrentContext : Pointer(Window)
   fun swapInterval = glfwSwapInterval(interval : Int32) : Void
   fun extensionSupported = glfwExtensionSupported(extension : Pointer(Int8)) : Int32
