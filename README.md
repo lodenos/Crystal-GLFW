@@ -9,7 +9,7 @@ GLFW binding to Crystal
    ```yaml
    dependencies:
      glfw:
-       github: lodenos/glfw
+       github: Minva/GLFW-Crystal
    ```
 
 2. Run `shards install`

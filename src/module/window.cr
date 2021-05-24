@@ -56,6 +56,10 @@ class GLFW::Window
     LibGLFW.setWindowShouldClose @ptrWindow, value
   end
 
+
+  def swap_buffers
+    LibGLFW.SwapBuffers(window : Pointer(Window)) : Void
+
   def show : Void
     LibGLFW.showWindow @ptrWindow
   end

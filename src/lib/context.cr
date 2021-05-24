@@ -25,15 +25,15 @@ lib LibGLFW
   alias GLproc = Void -> Void
   alias Errorfun = Int32, Pointer(Int32) -> Void
 
-  fun getCurrentContext = glfwGetCurrentContext : Pointer(Window)
-  fun swapInterval = glfwSwapInterval(interval : Int32) : Void
-  fun extensionSupported = glfwExtensionSupported(extension : Pointer(Int8)) : Int32
-  fun getProcAddress = glfwGetProcAddress(procname : Pointer(Int8)) : GLproc
+  fun get_current_context = glfwGetCurrentContext : Pointer(Window)
+  fun swap_interval = glfwSwapInterval(interval : Int32) : Void
+  fun extension_supported = glfwExtensionSupported(extension : Pointer(Int8)) : Int32
+  fun get_proc_address = glfwGetProcAddress(procname : Pointer(Int8)) : GLproc
   fun init = glfwInit : Int32
   fun terminate = glfwTerminate : Void
-  fun initHint = glfwInitHint(hint : Int32, value : Int32) : Void
-  fun getVersion = glfwGetVersion(major : Pointer(Int32), minor : Pointer(Int32), rev : Pointer(Int32)) : Void
-  fun getVersionString = glfwGetVersionString : Pointer(Int8)
-  fun getError = glfwGetError(description : Pointer(Pointer(Int8))) : Int32
-  fun setErrorCallback = glfwSetErrorCallback(callback : Errorfun) : Errorfun
+  fun init_hint = glfwInitHint(hint : Int32, value : Int32) : Void
+  fun get_version = glfwGetVersion(major : Pointer(Int32), minor : Pointer(Int32), rev : Pointer(Int32)) : Void
+  fun get_version_string = glfwGetVersionString : Pointer(Int8)
+  fun get_error = glfwGetError(description : Pointer(Pointer(Int8))) : Int32
+  fun set_error_callback = glfwSetErrorCallback(callback : Errorfun) : Errorfun
 end
